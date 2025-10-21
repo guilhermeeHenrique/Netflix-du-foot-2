@@ -133,6 +133,7 @@ export default function PricingSection({ onSubscribe }: PricingSectionProps) {
               <button
                 onClick={() => onSubscribe(plan.ctaAction)}
                 data-cta={`buy_${plan.name.toLowerCase()}`}
+                aria-label={plan.ctaAction === 'explore' ? 'Explorer la plateforme dans un nouvel onglet' : plan.ctaText}
                 className={`w-full py-4 rounded-lg font-semibold transition-all ${
                   plan.featured
                     ? 'bg-white text-[#0057FF] hover:bg-gray-100'

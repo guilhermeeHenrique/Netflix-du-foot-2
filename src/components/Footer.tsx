@@ -41,6 +41,7 @@ export default function Footer() {
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Visiter le site de ${partner.name}`}
                 className="group transition-all hover:scale-110"
               >
                 {partner.logo ? (
@@ -99,6 +100,7 @@ export default function Footer() {
                   href="https://www.instagram.com/dailymotion"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Suivre Dailymotion Sport sur Instagram"
                   className="w-10 h-10 bg-white/10 hover:bg-[#0057FF] rounded-full flex items-center justify-center transition-all"
                 >
                   <Instagram className="w-5 h-5" />
@@ -107,6 +109,7 @@ export default function Footer() {
                   href="https://www.facebook.com/Dailymotion"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Suivre Dailymotion Sport sur Facebook"
                   className="w-10 h-10 bg-white/10 hover:bg-[#0057FF] rounded-full flex items-center justify-center transition-all"
                 >
                   <Facebook className="w-5 h-5" />
@@ -115,6 +118,7 @@ export default function Footer() {
                   href="https://x.com/Dailymotion_FR"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Suivre Dailymotion Sport sur Twitter/X"
                   className="w-10 h-10 bg-white/10 hover:bg-[#0057FF] rounded-full flex items-center justify-center transition-all"
                 >
                   <Twitter className="w-5 h-5" />

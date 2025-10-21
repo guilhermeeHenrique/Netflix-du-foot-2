@@ -28,7 +28,7 @@ function App() {
 
   const handleSubscribe = (plan: string) => {
     if (plan === 'explore') {
-      window.location.href = 'https://tokens-click-90714936.figma.site/';
+      window.open('https://tokens-click-90714936.figma.site/', '_blank', 'noopener,noreferrer');
     } else {
       setSelectedPlan(plan);
       setCurrentView('payment');

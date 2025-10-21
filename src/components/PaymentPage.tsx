@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Check, CreditCard, Shield, Star } from 'lucide-react';
+import { Check, CreditCard, Shield, Star, ExternalLink } from 'lucide-react';
 
 interface PaymentPageProps {
   plan: string;
@@ -8,6 +8,7 @@ interface PaymentPageProps {
 
 export default function PaymentPage({ plan, onClose }: PaymentPageProps) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [showFallbackLink, setShowFallbackLink] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,6 +17,8 @@ export default function PaymentPage({ plan, onClose }: PaymentPageProps) {
     cvv: '',
     acceptTerms: false,
   });
+
+  const FIGMA_URL = 'https://tokens-click-90714936.figma.site/';
 
   const planDetails = {
     global: {
@@ -44,8 +47,12 @@ export default function PaymentPage({ plan, onClose }: PaymentPageProps) {
     setPaymentSuccess(true);
 
     setTimeout(() => {
-      window.location.href = 'https://tokens-click-90714936.figma.site/';
-    }, 3000);
+      const win = window.open(FIGMA_URL, '_blank', 'noopener,noreferrer');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        console.warn('Popup blocked – showing fallback link');
+        setShowFallbackLink(true);
+      }
+    }, 2500);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,12 +71,28 @@ export default function PaymentPage({ plan, onClose }: PaymentPageProps) {
             <Check className="w-12 h-12 text-white" />
           </div>
           <h2 className="text-3xl font-bold mb-4">Paiement approuvé !</h2>
-          <p className="text-xl text-[#CCCCCC]">
+          <p className="text-xl text-[#CCCCCC] mb-6">
             Merci pour votre confiance. Votre abonnement est maintenant actif.
           </p>
-          <div className="mt-8">
-            <div className="animate-pulse text-[#0057FF]">Redirection en cours...</div>
-          </div>
+          {!showFallbackLink ? (
+            <div className="mt-8">
+              <div className="animate-pulse text-[#0057FF]">Ouverture de votre espace...</div>
+            </div>
+          ) : (
+            <div className="mt-8 p-6 bg-gradient-to-br from-[#1A1A1C] to-[#0E0E10] border-2 border-[#0057FF]/30 rounded-lg">
+              <p className="text-[#CCCCCC] mb-4">Si rien ne s'ouvre, cliquez ici pour continuer :</p>
+              <a
+                href={FIGMA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Continuer vers la plateforme Dailymotion Sport"
+                className="inline-flex items-center gap-2 bg-[#0057FF] hover:bg-[#0046CC] text-white px-6 py-3 rounded-lg font-semibold transition-all blue-glow"
+              >
+                Accéder à la plateforme
+                <ExternalLink className="w-5 h-5" />
+              </a>
+            </div>
+          )}
         </div>
       </div>
     );
