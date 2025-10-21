@@ -3,9 +3,10 @@ import { useState } from 'react';
 
 interface HeaderProps {
   scrolled: boolean;
+  onOpenSupport: () => void;
 }
 
-export default function Header({ scrolled }: HeaderProps) {
+export default function Header({ scrolled, onOpenSupport }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
@@ -36,8 +37,8 @@ export default function Header({ scrolled }: HeaderProps) {
               <button onClick={() => scrollToSection('hero')} className="text-[#CCCCCC] hover:text-[#0057FF] transition-colors">
                 Accueil
               </button>
-              <button onClick={() => scrollToSection('aide')} className="text-[#CCCCCC] hover:text-[#0057FF] transition-colors">
-                Aide
+              <button onClick={onOpenSupport} className="text-[#CCCCCC] hover:text-[#0057FF] transition-colors">
+                Support
               </button>
               <button onClick={() => scrollToSection('about')} className="text-[#CCCCCC] hover:text-[#0057FF] transition-colors">
                 Qui sommes-nous
@@ -70,8 +71,8 @@ export default function Header({ scrolled }: HeaderProps) {
             <button onClick={() => scrollToSection('hero')} className="block text-[#CCCCCC] hover:text-[#0057FF] transition-colors py-2 w-full text-left">
               Accueil
             </button>
-            <button onClick={() => scrollToSection('aide')} className="block text-[#CCCCCC] hover:text-[#0057FF] transition-colors py-2 w-full text-left">
-              Aide
+            <button onClick={() => { onOpenSupport(); setMobileMenuOpen(false); }} className="block text-[#CCCCCC] hover:text-[#0057FF] transition-colors py-2 w-full text-left">
+              Support
             </button>
             <button onClick={() => scrollToSection('about')} className="block text-[#CCCCCC] hover:text-[#0057FF] transition-colors py-2 w-full text-left">
               Qui sommes-nous
